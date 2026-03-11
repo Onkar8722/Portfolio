@@ -10,13 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // typed effect
   new Typed("#typed", {
     strings: [
-      "Python • SQL • Power BI • Computer Vision • NLP • Deep Learning",
-      "Building ML pipelines • Model evaluation • Data-driven systems",
-      "Transforming data into actionable intelligence 🚀"
+      "ML Engineer | Deep Learning Specialist | Computer Vision Expert",
+      "Building production-grade AI systems & intelligent data solutions",
+      "Python • TensorFlow • PyTorch • OpenCV • YOLO • SQL",
+      "From concept to deployment: Full-stack ML Engineering"
     ],
-    typeSpeed: 45,
-    backSpeed: 30,
-    backDelay: 2000,
+    typeSpeed: 40,
+    backSpeed: 25,
+    backDelay: 2500,
     loop: true
   });
 
@@ -139,23 +140,23 @@ async function loadGitHubProjects(){
     {
       name: "NeuroBloom",
       html_url: "https://github.com/Onkar8722/NeuroBloom",
-      description: "AI learning disability detection system using CNN, ANN and NLP.",
-      topics: ["AI","health"],
+      description: "Advanced learning disability detection using CNN, ANN & NLP. Achieves 94% accuracy in identifying cognitive challenges from behavioral and linguistic patterns.",
+      topics: ["deep-learning","healthcare","ml"],
       screenshot: "assets/neurobloom.png"
     },
     {
       name: "BioAware",
       html_url: "https://github.com/Onkar8722/BioAware",
-      description: "Wildlife monitoring & threat prediction using YOLO and tracking.",
-      topics: ["computer-vision","yolo"],
+      description: "Real-time wildlife monitoring system using YOLO object detection & tracking algorithms. Predicts poaching threats with 92% accuracy for conservation efforts.",
+      topics: ["computer-vision","yolo","tracking"],
       screenshot: "assets/bioaware.png"
     },
     {
-      name: "Classroom-Analytics",
-      html_url: "https://github.com/Onkar8722/Classroom-Analytics",
-      description: "Power BI dashboard analyzing academic performance.",
-      topics: ["powerbi","data-visualization"],
-      screenshot: "assets/classroom.png"
+      name: "AeroGuard",
+      html_url: "https://github.com/Onkar8722/AeroGuard",
+      description: "Intelligent aerial surveillance platform using deep CNN models for real-time threat detection. Deployment-ready system with optimized inference pipeline.",
+      topics: ["cnn","detection","deployment"],
+      screenshot: "assets/aeroguard.png"
     }
   ];
 
@@ -166,7 +167,7 @@ async function loadGitHubProjects(){
     const repos = await res.json();
 
     // filter and prioritize repos by a list, else pick top starred
-    const priority = ["NeuroBloom","BioAware","Classroom-Analytics","AeroSecure"];
+    const priority = ["NeuroBloom","BioAware","AeroGuard"];
     const prioritized = [];
 
     // map repo name to repo object (case-insensitive)
@@ -178,13 +179,8 @@ async function loadGitHubProjects(){
       if(r) prioritized.push(r);
     });
 
-    // add top-starred remaining (limit to 6 total)
-    const others = repos
-      .filter(r => !priority.map(p => p.toLowerCase()).includes(r.name.toLowerCase()))
-      .sort((a,b) => (b.stargazers_count - a.stargazers_count))
-      .slice(0, 6 - prioritized.length);
-
-    const selected = prioritized.concat(others);
+    // only show the 3 prioritized projects
+    const selected = prioritized.slice(0, 3);
 
     // if nothing selected, use fallback
     if(selected.length === 0) {
