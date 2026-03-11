@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Onkar Kumbhar — AI & Data Science Portfolio</title>
+  <meta name="description" content="Onkar Kumbhar — AI & Data Science student. Projects: NeuroBloom, BioAware, Classroom Analytics. Python • ML • CV • NLP • Power BI" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Typed.js for typing animation -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <!-- Chart.js for skills chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+
+  <link rel="icon" href="assets/favicon.png" />
+  <style>
+    /* smooth scrolling */
+    html { scroll-behavior: smooth; }
+
+    /* subtle textured gradient background */
+    .bg-hero {
+      background: radial-gradient(ellipse at 20% 10%, rgba(255,255,255,0.02), transparent 20%),
+                  radial-gradient(ellipse at 80% 90%, rgba(255,255,255,0.01), transparent 20%),
+                  linear-gradient(180deg,#060606 0%, #0d0d0d 100%);
+      background-size: cover;
+      background-blend-mode: overlay;
+    }
+
+    /* subtle animated matrix lines */
+    .matrix {
+      position: absolute;
+      inset: 0;
+      opacity: .06;
+      background-image: linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 100px 100px;
+      pointer-events:none;
+      animation: drift 20s linear infinite;
+    }
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-200px); }
+    }
+
+    /* fade in animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    /* project card image ratio */
+    .project-image {
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      border-radius:6px;
+      background: linear-gradient(90deg,#111,#0b0b0b);
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .project-image {
+      transform: scale(1.05);
+    }
+
+    /* enhanced card hover */
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      border-color: rgba(6, 182, 212, 0.5);
+      box-shadow: 0 4px 20px rgba(6, 182, 212, 0.1);
+    }
+
+    /* smooth button transitions */
+    button, a.btn-enhanced {
+      transition: all 0.3s ease;
+    }
+
+    /* skill tag animation */
+    .skill-tag {
+      display: inline-block;
+      animation: slideIn 0.4s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* small screens tweak */
+    @media (max-width:640px) {
+      .project-image { height:120px; }
+    }
+  </style>
+</head>
+<body class="bg-black text-slate-100 antialiased">
+
+  <!-- NAV -->
+  <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div>
+      <a class="text-white font-semibold text-lg" href="#">Onkar Kumbhar</a>
+    </div>
+    <div class="hidden md:flex items-center space-x-6 text-slate-300">
+      <a href="#about" class="hover:text-cyan-400">About</a>
+      <a href="#skills" class="hover:text-cyan-400">Skills</a>
+      <a href="#projects" class="hover:text-cyan-400">Projects</a>
+      <a href="#experience" class="hover:text-cyan-400">Experience</a>
+      <a href="#contact" class="hover:text-cyan-400">Contact</a>
+      <a href="resume.pdf" class="ml-2 px-3 py-1 bg-cyan-600 hover:bg-cyan-500 rounded text-black font-medium">Resume</a>
+    </div>
+    <div class="md:hidden text-slate-300"> <!-- small mobile nav fallback --> 
+      <a href="#projects" class="text-sm hover:text-cyan-400">Projects</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="relative overflow-hidden bg-hero">
+    <div class="matrix"></div>
+
+    <div class="max-w-6xl mx-auto px-6 py-28 md:py-36">
+      <div class="md:flex md:items-center md:gap-10">
+        <div class="md:flex-1">
+          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Hi — I'm <span class="text-white">Onkar Kumbhar</span></h1>
+          <p class="mt-3 text-slate-300 max-w-2xl">
+            AI & Data Science student focused on building production-ready ML systems, computer vision pipelines, and data-driven dashboards.
+          </p>
+
+          <div class="mt-6">
+            <span id="typed" class="inline-block text-cyan-300 font-medium"></span>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="#projects" class="px-5 py-3 bg-cyan-600 hover:bg-cyan-500 rounded font-medium transition transform hover:scale-105">View My Work</a>
+            <a href="resume.pdf" class="px-5 py-3 border border-slate-700 hover:border-cyan-500 hover:bg-slate-900 rounded text-slate-200 transition">Download Resume</a>
+            <a href="https://github.com/Onkar8722" target="_blank" class="px-5 py-3 bg-slate-800 hover:bg-slate-700 rounded transition transform hover:scale-105">GitHub Profile</a>
+          </div>
+        </div>
+
+        <!-- hero right column: quick skills + chart -->
+        <div class="mt-10 md:mt-0 md:w-96">
+          <div class="p-6 bg-[#0b0b0b]/80 rounded-xl border border-slate-800 shadow">
+            <h3 class="text-sm text-slate-300 font-semibold">Core Skills</h3>
+            <ul class="mt-3 text-sm text-slate-300 space-y-1">
+              <li>Python • SQL • Pandas</li>
+              <li>Computer Vision • YOLO • OpenCV</li>
+              <li>Deep Learning • TensorFlow • PyTorch</li>
+              <li>Power BI • Data Visualization</li>
+            </ul>
+
+            <div class="mt-4">
+              <canvas id="skillsChart" width="300" height="220"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="max-w-6xl mx-auto px-6 py-16">
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-3xl font-bold">About</h2>
+        <p class="mt-4 text-slate-300 leading-relaxed">
+          I'm an AI & Data Science undergraduate building practical solutions using ML, computer vision and data engineering.
+          I design end-to-end pipelines — from data collection & ETL to model training, optimization and deployment.
+          Currently focusing on projects in learning disability detection, wildlife monitoring, and analytics dashboards.
+        </p>
+
+        <div class="mt-6 space-x-3">
+          <a href="#projects" class="px-4 py-2 bg-cyan-600 rounded hover:bg-cyan-500 transition inline-block">See My Projects</a>
+          <a href="#contact" class="px-4 py-2 border border-slate-700 rounded hover:border-cyan-500 hover:bg-slate-900 transition inline-block">Get In Touch</a>
+        </div>
+      </div>
+
+      <div class="p-6 rounded-xl bg-[#0b0b0b]/60 border border-slate-800">
+        <h3 class="font-semibold text-slate-200">Quick facts</h3>
+        <ul class="mt-3 text-slate-300 space-y-2 text-sm">
+          <li><strong>Location:</strong> Kolhapur, Maharashtra, India</li>
+          <li><strong>Education:</strong> B.Tech — AI & Data Science (CGPA: 8.1)</li>
+          <li><strong>Open to:</strong> Data Science, ML Engineering, Data Engineering roles</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS (big) -->
+  <section id="skills" class="bg-[#070707] py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">Skills & Tools</h2>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-xl bg-[#0b0b0b]/60 border border-slate-800">
+          <h4 class="font-semibold text-slate-100">Programming & Data</h4>
+          <p class="text-slate-300 mt-2 text-sm">Python, SQL, Pandas, NumPy, Excel</p>
+        </div>
+        <div class="p-6 rounded-xl bg-[#0b0b0b]/60 border border-slate-800">
+          <h4 class="font-semibold text-slate-100">ML & DL</h4>
+          <p class="text-slate-300 mt-2 text-sm">Scikit-learn, TensorFlow, PyTorch, Feature Engineering</p>
+        </div>
+        <div class="p-6 rounded-xl bg-[#0b0b0b]/60 border border-slate-800">
+          <h4 class="font-semibold text-slate-100">CV & Vision Ops</h4>
+          <p class="text-slate-300 mt-2 text-sm">OpenCV, YOLO, FaceNet, Object Detection, Tracking</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS (auto-load from GitHub) -->
+  <section id="projects" class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold text-center">Projects</h2>
+    <p class="text-center text-slate-400 mt-2">Selected works — GitHub thumbnails & links are loaded automatically.</p>
+
+    <div id="projectsGrid" class="mt-8 grid md:grid-cols-3 gap-6">
+      <!-- JS will inject project cards here -->
+    </div>
+
+    <div class="mt-8 text-center">
+      <a href="https://github.com/Onkar8722?tab=repositories" target="_blank" class="px-5 py-3 bg-cyan-600 rounded hover:bg-cyan-500 inline-block transition transform hover:scale-105">Explore All Repos on GitHub →</a>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="bg-[#070707] py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">Experience & Education</h2>
+      <div class="mt-8 grid md:grid-cols-2 gap-6">
+        <div class="card-hover p-6 rounded-xl bg-[#0b0b0b]/60 border border-slate-800">
+          <h4 class="font-semibold text-cyan-400">B.Tech AI & Data Science</h4>
+          <p class="text-slate-300 text-sm mt-1">Currently Pursuing | CGPA: 8.1</p>
+          <p class="text-slate-400 text-xs mt-2">Kolhapur, Maharashtra</p>
+          <p class="text-slate-300 mt-3 text-sm leading-relaxed">
+            Specialized in Machine Learning, Computer Vision, NLP and Data Engineering. 
+            Developed end-to-end ML pipelines and real-world applications.
+          </p>
+        </div>
+
+        <div class="card-hover p-6 rounded-xl bg-[#0b0b0b]/60 border border-slate-800">
+          <h4 class="font-semibold text-cyan-400">Machine Learning Intern</h4>
+          <p class="text-slate-300 text-sm mt-1">Data-Driven Solutions | 2025</p>
+          <p class="text-slate-400 text-xs mt-2">Remote/On-site</p>
+          <p class="text-slate-300 mt-3 text-sm leading-relaxed">
+            Developed ML models for production deployment, optimized model performance, 
+            and created data pipelines for real-time analytics systems.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications" class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold text-center">Certifications & Achievements</h2>
+    <div class="mt-8 grid md:grid-cols-3 gap-6">
+      <div class="card-hover p-5 rounded-lg bg-[#0b0b0b]/80 border border-slate-800 text-center">
+        <div class="text-3xl mb-2">🏆</div>
+        <h4 class="font-semibold text-cyan-300">ML Specialization</h4>
+        <p class="text-slate-400 text-sm mt-2">Advanced Machine Learning & Deep Learning</p>
+      </div>
+      <div class="card-hover p-5 rounded-lg bg-[#0b0b0b]/80 border border-slate-800 text-center">
+        <div class="text-3xl mb-2">📊</div>
+        <h4 class="font-semibold text-cyan-300">Data Analytics Certified</h4>
+        <p class="text-slate-400 text-sm mt-2">Google Data Analytics Professional Certificate</p>
+      </div>
+      <div class="card-hover p-5 rounded-lg bg-[#0b0b0b]/80 border border-slate-800 text-center">
+        <div class="text-3xl mb-2">💻</div>
+        <h4 class="font-semibold text-cyan-300">Computer Vision Expert</h4>
+        <p class="text-slate-400 text-sm mt-2">YOLO & OpenCV Advanced Specialization</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="bg-[#070707] py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">Get In Touch</h2>
+      <p class="text-center text-slate-300 mt-2">Let's collaborate on exciting AI & Data Science projects!</p>
+
+      <div class="mt-8 max-w-2xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- Contact Info -->
+          <div class="p-6 rounded-xl bg-[#0b0b0b]/60 border border-slate-800">
+            <h4 class="font-semibold text-cyan-300 mb-4">Contact Info</h4>
+            <div class="space-y-3 text-slate-300 text-sm">
+              <p>📧 <a href="mailto:onkark1045@gmail.com" class="text-cyan-400 hover:underline">onkark1045@gmail.com</a></p>
+              <p>📱 Open to opportunities & collaborations</p>
+              <p>🌍 Kolhapur, Maharashtra, India</p>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="p-6 rounded-xl bg-[#0b0b0b]/60 border border-slate-800">
+            <h4 class="font-semibold text-cyan-300 mb-4">Connect With Me</h4>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://linkedin.com/in/onkar-kumbhar08" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-blue-600 rounded text-sm transition">LinkedIn</a>
+              <a href="https://github.com/Onkar8722" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-gray-700 rounded text-sm transition">GitHub</a>
+              <a href="https://twitter.com" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-blue-400 rounded text-sm transition">Twitter</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-8 text-center text-slate-500 border-t border-slate-900 bg-black">
+    <div class="max-w-6xl mx-auto px-6">
+      <p>© <span id="year"></span> Onkar Kumbhar — Building intelligent solutions with AI & Data Science</p>
+      <p class="mt-2 text-xs">
+        <a href="#about" class="hover:text-cyan-400 transition">About</a> • 
+        <a href="#projects" class="hover:text-cyan-400 transition">Projects</a> • 
+        <a href="#contact" class="hover:text-cyan-400 transition">Contact</a> • 
+        <a href="resume.pdf" class="hover:text-cyan-400 transition">Resume</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
