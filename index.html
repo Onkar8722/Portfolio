@@ -68,15 +68,20 @@
 
     /* ===== BACKGROUND & BASE STYLES ===== */
     body {
-      background: linear-gradient(180deg, #060606 0%, #0a0a0a 50%, #060606 100%);
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #0f1e3d 100%);
+      background-attachment: fixed;
       min-height: 100vh;
+      animation: subtleShift 20s ease-in-out infinite;
+    }
+
+    @keyframes subtleShift {
+      0% { filter: brightness(1); }
+      50% { filter: brightness(1.05); }
+      100% { filter: brightness(1); }
     }
 
     .bg-hero {
-      background: radial-gradient(ellipse at 20% 10%, rgba(6,182,212,0.08), transparent 40%),
-                  radial-gradient(ellipse at 80% 90%, rgba(30,58,138,0.06), transparent 40%),
-                  linear-gradient(180deg, #060606 0%, #0d0d0d 100%);
-      background-size: 100% 100%, 100% 100%, cover;
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #0f1e3d 100%);
       background-attachment: fixed;
       position: relative;
       overflow: hidden;
@@ -114,25 +119,21 @@
       width: 100%;
     }
 
-    /* ===== AI/ML DYNAMIC BACKGROUND ===== */
+    /* AI/ML DYNAMIC BACKGROUND ===== */
     .matrix {
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(6,182,212,0.06) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(59,130,246,0.06) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(139,92,246,0.04) 0%, transparent 50%);
-      background-size: 100% 100%;
-      background-attachment: fixed;
+      display: none;
     }
 
     /* Neural Network Nodes */
     .nn-nodes {
       position: absolute;
       inset: 0;
-      opacity: 0.5;
+      opacity: 0;
       pointer-events: none;
+      display: none;
     }
 
     .nn-node {
@@ -159,8 +160,9 @@
     .data-particles {
       position: absolute;
       inset: 0;
-      opacity: 0.5;
+      opacity: 0;
       pointer-events: none;
+      display: none;
     }
 
     .particle {
@@ -182,21 +184,18 @@
     .algo-grid {
       position: absolute;
       inset: 0;
-      opacity: 0.12;
+      opacity: 0;
       pointer-events: none;
-      background-image: 
-        linear-gradient(90deg, rgba(6,182,212,0.4) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(6,182,212,0.4) 1px, transparent 1px);
-      background-size: 100px 100px;
-      animation: gridShift 20s linear infinite;
+      display: none;
     }
 
     /* Connection Lines - Neural Network Paths */
     .connections {
       position: absolute;
       inset: 0;
-      opacity: 0.25;
+      opacity: 0;
       pointer-events: none;
+      display: none;
     }
 
     .connection-line {
@@ -226,14 +225,9 @@
     .code-bg {
       position: absolute;
       inset: 0;
-      opacity: 0.02;
+      opacity: 0;
       pointer-events: none;
-      font-family: 'JetBrains Mono', 'Courier New', monospace;
-      font-size: 11px;
-      overflow: hidden;
-      white-space: pre;
-      color: rgba(6,182,212,0.3);
-      animation: scrollCode 30s linear infinite;
+      display: none;
     }
 
     @keyframes drift {
@@ -672,14 +666,16 @@
       left: 0;
       right: 0;
       bottom: 0;
-      opacity: 1;
+      opacity: 0;
       pointer-events: none;
+      display: none;
     }
 
     .section-particle {
       position: absolute;
       border-radius: 50%;
       filter: blur(35px);
+      display: none;
     }
 
     .section-particle-1 { 
@@ -739,8 +735,7 @@
       height: 12px;
       border-radius: 50%;
       pointer-events: none;
-      box-shadow: 0 0 20px currentColor;
-      animation: nodePulseStrong 2s ease-in-out infinite;
+      display: none;
     }
 
     @keyframes nodePulseStrong {
@@ -860,7 +855,23 @@
         linear-gradient(135deg, rgba(6,182,212,0.6), rgba(59,130,246,0.6)) border-box;
     }
 
-    body.light-mode #about h3 {
+    /* Hero Section Light Mode */
+    body.light-mode #hero .text-cyan-300 {
+      color: #0891b2 !important;
+    }
+
+    body.light-mode #hero .text-cyan-400 {
+      color: #0891b2 !important;
+    }
+
+    body.light-mode #hero .text-cyan-300:hover,
+    body.light-mode #hero .text-cyan-400:hover {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode #hero .text-purple-400,
+    body.light-mode #hero .text-blue-400,
+    body.light-mode #hero .text-cyan-300 {
       color: #0f172a !important;
     }
 
@@ -919,6 +930,11 @@
     /* Skills Section Light Mode */
     body.light-mode #skills h2 {
       color: #0f172a !important;
+    }
+
+    body.light-mode #skills .h-2, 
+    body.light-mode #skills .h-2\.5 {
+      background-color: rgba(100, 116, 139, 0.3) !important;
     }
 
     body.light-mode #skills h3 {
@@ -1045,6 +1061,31 @@
       background-color: rgba(30, 41, 59, 0.2) !important;
     }
 
+    /* Skill Bar Fills - Light Mode */
+    body.light-mode #skills .bg-cyan-500 {
+      background-color: #06b6d4 !important;
+    }
+
+    body.light-mode #skills .bg-purple-500 {
+      background-color: #9333ea !important;
+    }
+
+    body.light-mode #skills .bg-blue-500 {
+      background-color: #3b82f6 !important;
+    }
+
+    body.light-mode #skills .bg-emerald-500 {
+      background-color: #10b981 !important;
+    }
+
+    body.light-mode #skills .bg-orange-500 {
+      background-color: #f59e0b !important;
+    }
+
+    body.light-mode #skills .bg-pink-500 {
+      background-color: #ec4899 !important;
+    }
+
     body.light-mode #skills .text-cyan-300 {
       color: #06b6d4 !important;
     }
@@ -1096,6 +1137,36 @@
       background-color: rgba(206, 245, 254, 0.5) !important;
     }
 
+    body.light-mode #skills .grid.grid-cols-2 > div:nth-child(1) {
+      background: linear-gradient(to bottom right, rgba(6, 182, 212, 0.15), rgba(6, 182, 212, 0.08)) !important;
+      border-color: rgba(6, 182, 212, 0.4) !important;
+    }
+
+    body.light-mode #skills .grid.grid-cols-2 > div:nth-child(2) {
+      background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08)) !important;
+      border-color: rgba(59, 130, 246, 0.4) !important;
+    }
+
+    body.light-mode #skills .grid.grid-cols-2 > div:nth-child(3) {
+      background: linear-gradient(to bottom right, rgba(147, 51, 234, 0.15), rgba(147, 51, 234, 0.08)) !important;
+      border-color: rgba(147, 51, 234, 0.4) !important;
+    }
+
+    body.light-mode #skills .grid.grid-cols-2 > div:nth-child(4) {
+      background: linear-gradient(to bottom right, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08)) !important;
+      border-color: rgba(16, 185, 129, 0.4) !important;
+    }
+
+    body.light-mode #skills .grid.grid-cols-2 > div:nth-child(5) {
+      background: linear-gradient(to bottom right, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08)) !important;
+      border-color: rgba(245, 158, 11, 0.4) !important;
+    }
+
+    body.light-mode #skills .grid.grid-cols-2 > div:nth-child(6) {
+      background: linear-gradient(to bottom right, rgba(236, 72, 153, 0.15), rgba(236, 72, 153, 0.08)) !important;
+      border-color: rgba(236, 72, 153, 0.4) !important;
+    }
+
     body.light-mode #skills .bg-slate-900\/60 {
       background-color: rgba(206, 245, 254, 0.7) !important;
     }
@@ -1118,7 +1189,7 @@
     }
 
     body.light-mode #skills .grid.grid-cols-2 .text-slate-400 {
-      color: #64748b !important;
+      color: #4b5563 !important;
     }
 
     /* Make sure all proficiency percentage text is colored properly */
@@ -1224,8 +1295,10 @@
 
     /* ===== DARK MODE STYLES ===== */
     body.light-mode {
-      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #f8fafc 100%) !important;
+      background: linear-gradient(135deg, #d0e8f9 0%, #c4dff5 50%, #d0e8f9 100%) !important;
+      background-attachment: fixed;
       color: #1e293b !important;
+      animation: subtleShift 20s ease-in-out infinite;
     }
 
     body.light-mode * {
@@ -1255,22 +1328,22 @@
     }
 
     body.light-mode .bg-hero {
-      background: radial-gradient(ellipse at 20% 10%, rgba(6,182,212,0.15), transparent 40%),
-                  radial-gradient(ellipse at 80% 90%, rgba(30,58,138,0.12), transparent 40%),
-                  linear-gradient(180deg, #f8fafc 0%, #e0f2fe 100%) !important;
+      background: linear-gradient(135deg, #d0e8f9 0%, #c4dff5 50%, #d0e8f9 100%) !important;
+      background-attachment: fixed;
     }
 
     body.light-mode section {
-      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(224,242,254,0.6)) !important;
+      background: transparent !important;
     }
 
     body.light-mode .card-hover, 
     body.light-mode .tech-card, 
     body.light-mode .project-card, 
     body.light-mode .cert-card {
-      background: rgba(255, 255, 255, 0.95) !important;
-      border-color: rgba(6, 182, 212, 0.3) !important;
+      background: rgba(255, 255, 255, 0.98) !important;
+      border-color: rgba(6, 182, 212, 0.4) !important;
       color: #1e293b !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
     }
 
     body.light-mode .project-image {
@@ -1278,10 +1351,7 @@
     }
 
     body.light-mode .matrix {
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(6,182,212,0.12) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(59,130,246,0.10) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(139,92,246,0.06) 0%, transparent 50%) !important;
+      background: transparent !important;
     }
 
     body.light-mode .border-slate-900 {
@@ -1308,14 +1378,41 @@
       background-color: rgba(248, 250, 252, 0.9) !important;
     }
 
-    body.light-mode button {
-      background-color: rgba(6, 182, 212, 0.1) !important;
-      color: #475569 !important;
+    body.light-mode button, body.light-mode .btn-primary, body.light-mode .btn-secondary {
+      background-color: rgba(6, 182, 212, 0.15) !important;
+      color: #0891b2 !important;
+      border-color: #0891b2 !important;
     }
 
-    body.light-mode button:hover {
-      background-color: rgba(6, 182, 212, 0.2) !important;
+    body.light-mode button:hover, body.light-mode .btn-primary:hover, body.light-mode .btn-secondary:hover {
+      background-color: rgba(6, 182, 212, 0.25) !important;
       color: #06b6d4 !important;
+    }
+
+    body.light-mode #hero .bg-cyan-900\/20,
+    body.light-mode #hero .bg-purple-900\/20,
+    body.light-mode #hero .bg-blue-900\/20,
+    body.light-mode #hero .bg-gradient-to-br {
+      background-color: rgba(206, 245, 254, 0.4) !important;
+      border-color: rgba(6, 182, 212, 0.4) !important;
+    }
+
+    body.light-mode #hero .bg-gradient-to-br.from-emerald-900\/30,
+    body.light-mode #hero .bg-gradient-to-br.from-blue-900\/30,
+    body.light-mode #hero .bg-gradient-to-br.from-purple-900\/30 {
+      border-color: rgba(6, 182, 212, 0.4) !important;
+    }
+
+    body.light-mode #hero .bg-gradient-to-br.from-emerald-900\/30 {
+      background: linear-gradient(to bottom right, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08)) !important;
+    }
+
+    body.light-mode #hero .bg-gradient-to-br.from-blue-900\/30 {
+      background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08)) !important;
+    }
+
+    body.light-mode #hero .bg-gradient-to-br.from-purple-900\/30 {
+      background: linear-gradient(to bottom right, rgba(147, 51, 234, 0.15), rgba(147, 51, 234, 0.08)) !important;
     }
 
     body.light-mode #theme-toggle {
@@ -1331,19 +1428,19 @@
 
     /* Comprehensive Light Mode Styling */
     body.light-mode .text-slate-100 {
-      color: #1e293b !important;
+      color: #000000 !important;
     }
 
     body.light-mode .text-slate-200 {
-      color: #334155 !important;
+      color: #1e293b !important;
     }
 
     body.light-mode .text-slate-300 {
-      color: #64748b !important;
+      color: #1e293b !important;
     }
 
     body.light-mode .text-slate-400 {
-      color: #94a3b8 !important;
+      color: #334155 !important;
     }
 
     body.light-mode .text-slate-500 {
@@ -1355,7 +1452,7 @@
     }
 
     body.light-mode .text-white {
-      color: #1e293b !important;
+      color: #000000 !important;
     }
 
     body.light-mode .text-cyan-300 {
@@ -1573,11 +1670,11 @@
 
     /* Ensure contrast for readability */
     body.light-mode strong {
-      color: #0f172a !important;
+      color: #000000 !important;
     }
 
     body.light-mode b {
-      color: #0f172a !important;
+      color: #000000 !important;
     }
 
     /* Final catch-all for any remaining dark text */
@@ -1623,7 +1720,7 @@
           <svg id="sun-icon" class="w-5 h-5 inline hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l-2.83-2.83a1 1 0 00-1.414 1.414l2.83 2.83a1 1 0 001.414-1.414zM2.05 6.464a1 1 0 00-1.414 1.414l2.83 2.83a1 1 0 101.414-1.414L2.05 6.464zm12.12 4.97l2.83-2.83a1 1 0 00-1.414-1.414l-2.83 2.83a1 1 0 001.414 1.414zM13.464 2.05a1 1 0 00-1.414 1.414l2.83 2.83a1 1 0 001.414-1.414L13.464 2.05zM6.464 13.536a1 1 0 001.414 1.414l2.83-2.83a1 1 0 00-1.414-1.414l-2.83 2.83zM3a1 1 0 011-1h2a1 1 0 110 2H4a1 1 0 01-1-1zm14 0a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
           <svg id="moon-icon" class="w-5 h-5 inline" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
         </button>
-        <a href="resume.pdf" class="ml-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg text-white font-medium shadow-lg shadow-cyan-600/20 transition transform hover:scale-105">Resume</a>
+        <a href="resume.pdf?v=20260312" class="ml-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg text-white font-medium shadow-lg shadow-cyan-600/20 transition transform hover:scale-105" id="resume-nav">Resume</a>
       </div>
       <div class="md:hidden text-slate-300">
         <a href="#projects" class="text-sm hover:text-cyan-400">Projects</a>
@@ -1705,7 +1802,7 @@
           <div class="flex flex-wrap gap-2.5">
             <a href="#projects" class="px-5 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg font-bold transition transform hover:scale-105 shadow-lg shadow-cyan-600/30 text-sm">Explore Projects</a>
             <a href="#contact" class="px-5 py-2 border-2 border-cyan-600 hover:bg-cyan-600/10 rounded-lg font-bold transition transform hover:scale-105 text-sm">Let's Connect</a>
-            <a href="resume.pdf" class="px-5 py-2 bg-slate-800/50 hover:bg-slate-700 rounded-lg font-bold transition transform hover:scale-105 text-sm">Resume</a>
+            <a href="resume.pdf?v=20260312" class="px-5 py-2 bg-slate-800/50 hover:bg-slate-700 rounded-lg font-bold transition transform hover:scale-105 text-sm" id="resume-hero">Resume</a>
           </div>
         </div>
 
@@ -1735,22 +1832,6 @@
 
   <!-- ABOUT -->
   <section id="about" class="max-w-6xl mx-auto px-6 py-10 relative">
-    <!-- Dynamic Background -->
-    <div class="section-bg">
-      <div class="section-particles">
-        <div class="section-particle section-particle-1"></div>
-        <div class="section-particle section-particle-2"></div>
-        <div class="section-particle section-particle-3"></div>
-        <div class="section-particle section-particle-4"></div>
-      </div>
-      <!-- Neural Network Nodes -->
-      <div class="neural-node" style="top: 15%; left: 10%; color: #06b6d4;"></div>
-      <div class="neural-node" style="top: 35%; left: 25%; color: #3b82f6;"></div>
-      <div class="neural-node" style="top: 60%; right: 15%; color: #8b5cf6;"></div>
-      <div class="neural-node" style="bottom: 20%; left: 30%; color: #22c55e;"></div>
-      <div class="neural-node" style="bottom: 15%; right: 25%; color: #ec4899;"></div>
-    </div>
-    
     <div class="grid md:grid-cols-2 gap-8 items-start relative z-10">
       <div class="space-y-6">
         <div>
@@ -1808,21 +1889,6 @@
 
   <!-- SKILLS (combined) -->
   <section id="skills" class="py-10 relative">
-    <!-- Dynamic Background -->
-    <div class="section-bg">
-      <div class="section-particles">
-        <div class="section-particle section-particle-1"></div>
-        <div class="section-particle section-particle-3"></div>
-        <div class="section-particle section-particle-4"></div>
-      </div>
-      <!-- Neural Network Nodes -->
-      <div class="neural-node" style="top: 20%; right: 10%; color: #06b6d4;"></div>
-      <div class="neural-node" style="top: 40%; left: 15%; color: #3b82f6;"></div>
-      <div class="neural-node" style="top: 55%; right: 20%; color: #8b5cf6;"></div>
-      <div class="neural-node" style="bottom: 25%; left: 10%; color: #22c55e;"></div>
-      <div class="neural-node" style="bottom: 10%; right: 5%; color: #f59e0b;"></div>
-    </div>
-    
     <div class="max-w-6xl mx-auto px-6 relative z-10">
       <div class="text-center mb-8">
         <h2 class="text-3xl font-bold mb-2">Technical Expertise</h2>
@@ -1847,7 +1913,7 @@
               <span class="text-cyan-400 font-semibold">85%</span>
             </div>
             <div class="h-2 bg-slate-800/60 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-cyan-500 to-cyan-400 rounded-full" style="width: 85%;"></div>
+              <div class="h-full bg-cyan-500 rounded-full" style="width: 85%;"></div>
             </div>
           </div>
         </div>
@@ -1867,7 +1933,7 @@
               <span class="text-purple-400 font-semibold">75%</span>
             </div>
             <div class="h-2 bg-slate-800/60 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-purple-500 to-purple-400 rounded-full" style="width: 75%;"></div>
+              <div class="h-full bg-purple-500 rounded-full" style="width: 75%;"></div>
             </div>
           </div>
         </div>
@@ -1887,7 +1953,7 @@
               <span class="text-blue-400 font-semibold">70%</span>
             </div>
             <div class="h-2 bg-slate-800/60 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full" style="width: 70%;"></div>
+              <div class="h-full bg-blue-500 rounded-full" style="width: 70%;"></div>
             </div>
           </div>
         </div>
@@ -1907,7 +1973,7 @@
               <span class="text-emerald-400 font-semibold">80%</span>
             </div>
             <div class="h-2 bg-slate-800/60 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full" style="width: 80%;"></div>
+              <div class="h-full bg-emerald-500 rounded-full" style="width: 80%;"></div>
             </div>
           </div>
         </div>
@@ -1926,7 +1992,7 @@
                 <span class="text-cyan-400 font-semibold">85%</span>
               </div>
               <div class="h-2.5 bg-slate-800/60 rounded-full overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-cyan-500 to-cyan-400 rounded-full" style="width: 85%;"></div>
+                <div class="h-full bg-cyan-500 rounded-full" style="width: 85%;"></div>
               </div>
             </div>
 
@@ -1936,7 +2002,7 @@
                 <span class="text-purple-400 font-semibold">75%</span>
               </div>
               <div class="h-2.5 bg-slate-800/60 rounded-full overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-purple-500 to-purple-400 rounded-full" style="width: 75%;"></div>
+                <div class="h-full bg-purple-500 rounded-full" style="width: 75%;"></div>
               </div>
             </div>
 
@@ -1946,7 +2012,7 @@
                 <span class="text-blue-400 font-semibold">75%</span>
               </div>
               <div class="h-2.5 bg-slate-800/60 rounded-full overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full" style="width: 75%;"></div>
+                <div class="h-full bg-blue-500 rounded-full" style="width: 75%;"></div>
               </div>
             </div>
 
@@ -1956,7 +2022,7 @@
                 <span class="text-emerald-400 font-semibold">70%</span>
               </div>
               <div class="h-2.5 bg-slate-800/60 rounded-full overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full" style="width: 70%;"></div>
+                <div class="h-full bg-emerald-500 rounded-full" style="width: 70%;"></div>
               </div>
             </div>
 
@@ -1966,7 +2032,7 @@
                 <span class="text-orange-400 font-semibold">80%</span>
               </div>
               <div class="h-2.5 bg-slate-800/60 rounded-full overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-orange-500 to-orange-400 rounded-full" style="width: 80%;"></div>
+                <div class="h-full bg-orange-500 rounded-full" style="width: 80%;"></div>
               </div>
             </div>
 
@@ -1976,7 +2042,7 @@
                 <span class="text-pink-400 font-semibold">50%</span>
               </div>
               <div class="h-2.5 bg-slate-800/60 rounded-full overflow-hidden">
-                <div class="h-full bg-gradient-to-r from-pink-500 to-pink-400 rounded-full" style="width: 50%;"></div>
+                <div class="h-full bg-pink-500 rounded-full" style="width: 50%;"></div>
               </div>
             </div>
           </div>
@@ -2018,21 +2084,6 @@
 
   <!-- PROJECTS (auto-load from GitHub) -->
   <section id="projects" class="max-w-6xl mx-auto px-6 py-10 relative">
-    <!-- Dynamic Background -->
-    <div class="section-bg">
-      <div class="section-particles">
-        <div class="section-particle section-particle-2"></div>
-        <div class="section-particle section-particle-3"></div>
-        <div class="section-particle section-particle-4"></div>
-      </div>
-      <!-- Neural Network Nodes -->
-      <div class="neural-node" style="top: 10%; left: 8%; color: #06b6d4;"></div>
-      <div class="neural-node" style="top: 30%; right: 12%; color: #3b82f6;"></div>
-      <div class="neural-node" style="top: 50%; left: 20%; color: #8b5cf6;"></div>
-      <div class="neural-node" style="bottom: 20%; right: 15%; color: #22c55e;"></div>
-      <div class="neural-node" style="bottom: 5%; left: 40%; color: #ec4899;"></div>
-    </div>
-    
     <div class="relative z-10">
       <h2 class="text-3xl font-bold mb-2">Featured Projects</h2>
       <div class="w-12 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-3"></div>
@@ -2051,21 +2102,6 @@
 
   <!-- EXPERIENCE -->
   <section id="experience" class="py-10 relative">
-    <!-- Dynamic Background -->
-    <div class="section-bg">
-      <div class="section-particles">
-        <div class="section-particle section-particle-1"></div>
-        <div class="section-particle section-particle-2"></div>
-        <div class="section-particle section-particle-4"></div>
-      </div>
-      <!-- Neural Network Nodes -->
-      <div class="neural-node" style="top: 15%; left: 12%; color: #06b6d4;"></div>
-      <div class="neural-node" style="top: 45%; right: 18%; color: #3b82f6;"></div>
-      <div class="neural-node" style="top: 65%; left: 25%; color: #8b5cf6;"></div>
-      <div class="neural-node" style="bottom: 25%; right: 10%; color: #22c55e;"></div>
-      <div class="neural-node" style="bottom: 8%; left: 50%; color: #f59e0b;"></div>
-    </div>
-    
     <div class="max-w-6xl mx-auto px-6 relative z-10">
       <div class="text-center mb-8">
         <h2 class="text-3xl font-bold mb-3">Professional Background</h2>
@@ -2107,21 +2143,6 @@
 
   <!-- CERTIFICATIONS & CREDENTIALS -->
   <section id="certifications" class="max-w-6xl mx-auto px-6 py-10 relative">
-    <!-- Dynamic Background -->
-    <div class="section-bg">
-      <div class="section-particles">
-        <div class="section-particle section-particle-1"></div>
-        <div class="section-particle section-particle-3"></div>
-        <div class="section-particle section-particle-4"></div>
-      </div>
-      <!-- Neural Network Nodes -->
-      <div class="neural-node" style="top: 18%; right: 15%; color: #06b6d4;"></div>
-      <div class="neural-node" style="top: 38%; left: 10%; color: #3b82f6;"></div>
-      <div class="neural-node" style="top: 60%; right: 25%; color: #8b5cf6;"></div>
-      <div class="neural-node" style="bottom: 22%; left: 20%; color: #22c55e;"></div>
-      <div class="neural-node" style="bottom: 12%; right: 30%; color: #ec4899;"></div>
-    </div>
-    
     <div class="relative z-10">
       <h2 class="text-3xl font-bold mb-2">Certifications & Courses</h2>
       <div class="w-12 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-3"></div>
@@ -2189,21 +2210,6 @@
 
   <!-- CONTACT -->
   <section id="contact" class="py-10 relative">
-    <!-- Dynamic Background -->
-    <div class="section-bg">
-      <div class="section-particles">
-        <div class="section-particle section-particle-1"></div>
-        <div class="section-particle section-particle-2"></div>
-        <div class="section-particle section-particle-3"></div>
-      </div>
-      <!-- Neural Network Nodes -->
-      <div class="neural-node" style="top: 12%; left: 15%; color: #06b6d4;"></div>
-      <div class="neural-node" style="top: 42%; right: 20%; color: #3b82f6;"></div>
-      <div class="neural-node" style="top: 68%; left: 30%; color: #8b5cf6;"></div>
-      <div class="neural-node" style="bottom: 18%; right: 12%; color: #22c55e;"></div>
-      <div class="neural-node" style="bottom: 8%; left: 45%; color: #f59e0b;"></div>
-    </div>
-    
     <div class="max-w-6xl mx-auto px-6 relative z-10">
       <div class="text-center mb-8">
         <h2 class="text-3xl font-bold mb-2">Get In Touch</h2>
@@ -2261,7 +2267,7 @@
             <li><a href="#about" class="hover:text-cyan-400 transition">About</a></li>
             <li><a href="#projects" class="hover:text-cyan-400 transition">Projects</a></li>
             <li><a href="#experience" class="hover:text-cyan-400 transition">Experience</a></li>
-            <li><a href="resume.pdf" class="hover:text-cyan-400 transition">Resume</a></li>
+            <li><a href="resume.pdf?v=20260312" class="hover:text-cyan-400 transition" id="resume-footer">Resume</a></li>
           </ul>
         </div>
 

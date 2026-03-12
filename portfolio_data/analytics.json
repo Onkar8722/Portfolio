@@ -460,5 +460,82 @@
     "data": {
       "page": "home"
     }
+  },
+  {
+    "timestamp": "2026-03-12T16:43:28.340611",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:45:26.472506",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:46:51.165996",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:48:35.100412",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:50:47.137603",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:52:03.491779",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:54:03.840620",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:55:58.665014",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:57:36.894771",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:58:19.064183",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:59:33.206525",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
   }
 ]
