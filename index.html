@@ -578,6 +578,7 @@
     section {
       position: relative;
       scroll-margin-top: 60px;
+      overflow: hidden;
     }
 
     section:not(:first-of-type) {
@@ -601,7 +602,230 @@
 
     /* Alternating background */
     section:nth-child(even) {
-      background: linear-gradient(180deg, transparent, rgba(6,182,212,0.03), transparent);
+      background: none;
+    }
+    
+    section:nth-child(odd) {
+      background: none;
+    }
+
+    /* ===== DYNAMIC BACKGROUNDS FOR SECTIONS ===== */
+    .section-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* Animated background gradient */
+    .section-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        linear-gradient(45deg, rgba(6,182,212,0.3) 0%, transparent 30%),
+        linear-gradient(-45deg, rgba(59,130,246,0.3) 20%, transparent 50%),
+        linear-gradient(135deg, rgba(139,92,246,0.25) 40%, transparent 70%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      opacity: 1;
+    }
+
+    .section-bg::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(6,182,212,0.4) 0%, transparent 40%),
+        radial-gradient(circle at 80% 50%, rgba(59,130,246,0.35) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(34,197,94,0.3) 0%, transparent 40%);
+      background-size: 100% 100%;
+      animation: pulseGlow 8s ease-in-out infinite;
+      opacity: 1;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.8; filter: brightness(1); }
+      50% { opacity: 1; filter: brightness(1.3); }
+    }
+
+    /* Neural Network Nodes */
+    .section-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    .section-particle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(35px);
+    }
+
+    .section-particle-1 { 
+      width: 250px; 
+      height: 250px; 
+      top: -100px; 
+      left: 5%; 
+      background: radial-gradient(circle, rgba(6,182,212,0.8) 0%, transparent 60%);
+      animation: floatNode 12s ease-in-out infinite;
+      box-shadow: 0 0 60px rgba(6,182,212,0.7), 0 0 100px rgba(6,182,212,0.4);
+    }
+
+    .section-particle-2 { 
+      width: 300px; 
+      height: 300px; 
+      top: 10%; 
+      right: -80px; 
+      background: radial-gradient(circle, rgba(59,130,246,0.7) 0%, transparent 60%);
+      animation: floatNodeAlt 14s ease-in-out infinite;
+      box-shadow: 0 0 70px rgba(59,130,246,0.6), 0 0 120px rgba(59,130,246,0.3);
+    }
+
+    .section-particle-3 { 
+      width: 280px; 
+      height: 280px; 
+      bottom: -80px; 
+      left: 20%; 
+      background: radial-gradient(circle, rgba(139,92,246,0.75) 0%, transparent 60%);
+      animation: floatNode 16s ease-in-out infinite;
+      box-shadow: 0 0 65px rgba(139,92,246,0.7), 0 0 110px rgba(139,92,246,0.4);
+    }
+
+    .section-particle-4 { 
+      width: 320px; 
+      height: 320px; 
+      bottom: -100px; 
+      right: 0%; 
+      background: radial-gradient(circle, rgba(34,197,94,0.7) 0%, transparent 60%);
+      animation: floatNodeAlt 18s ease-in-out infinite;
+      box-shadow: 0 0 80px rgba(34,197,94,0.6), 0 0 130px rgba(34,197,94,0.3);
+    }
+
+    @keyframes floatNode {
+      0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+      50% { transform: translateY(-40px) translateX(20px) scale(1.1); }
+    }
+
+    @keyframes floatNodeAlt {
+      0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+      50% { transform: translateY(40px) translateX(-20px) scale(1.1); }
+    }
+
+    /* Neural Network Nodes - Sharp version */
+    .neural-node {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      pointer-events: none;
+      box-shadow: 0 0 20px currentColor;
+      animation: nodePulseStrong 2s ease-in-out infinite;
+    }
+
+    @keyframes nodePulseStrong {
+      0%, 100% { 
+        transform: scale(1);
+        opacity: 0.8;
+        filter: drop-shadow(0 0 8px currentColor);
+      }
+      50% { 
+        transform: scale(1.5);
+        opacity: 1;
+        filter: drop-shadow(0 0 16px currentColor);
+      }
+    }
+
+    /* Connection lines between nodes */
+    .neural-connection {
+      position: absolute;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(6,182,212,0.6), transparent);
+      animation: connectionFlow 3s ease-in-out infinite;
+    }
+
+    @keyframes connectionFlow {
+      0%, 100% { 
+        opacity: 0.3;
+        box-shadow: none;
+      }
+      50% { 
+        opacity: 0.9;
+        box-shadow: 0 0 20px rgba(6,182,212,0.8);
+      }
+    }
+
+    @keyframes sectionDrift {
+      0%, 100% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 0.8;
+      }
+      50% { 
+        transform: translate(30px, 30px) scale(1.05);
+        opacity: 1;
+      }
+    }
+
+    @keyframes particleFlow {
+      0% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0.3;
+      }
+      10%, 90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100px) scale(0.8);
+        opacity: 0.1;
+      }
+    }
+
+    /* Subtle connection lines for sections */
+    .section-connections {
+      position: absolute;
+      inset: 0;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .connection-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1px solid rgba(6,182,212,0.3);
+      animation: connectionPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes connectionPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 rgba(6,182,212,0.3);
+        opacity: 0.5;
+      }
+      50% {
+        box-shadow: 0 0 10px rgba(6,182,212,0.6);
+        opacity: 1;
+      }
     }
 
     /* ===== SHADOWS & GLOWS ===== */
@@ -628,6 +852,306 @@
         linear-gradient(135deg, #0f172a, #1e293b) padding-box,
         linear-gradient(135deg, rgba(6,182,212,0.4), rgba(59,130,246,0.4)) border-box;
       border-radius: 1rem;
+    }
+
+    body.light-mode .gradient-border {
+      background: 
+        linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,249,255,0.8)) padding-box,
+        linear-gradient(135deg, rgba(6,182,212,0.6), rgba(59,130,246,0.6)) border-box;
+    }
+
+    body.light-mode #about h3 {
+      color: #0f172a !important;
+    }
+
+    body.light-mode #about h4 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode #about p {
+      color: #334155 !important;
+    }
+
+    body.light-mode #about .text-slate-100 {
+      color: #0f172a !important;
+    }
+
+    body.light-mode #about .text-slate-300 {
+      color: #334155 !important;
+    }
+
+    body.light-mode #about .text-cyan-400 {
+      color: #0891b2 !important;
+    }
+
+    body.light-mode #experience h2 {
+      color: #0f172a !important;
+    }
+
+    body.light-mode #experience h4 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode #experience p {
+      color: #334155 !important;
+    }
+
+    body.light-mode #experience .text-slate-300 {
+      color: #334155 !important;
+    }
+
+    body.light-mode #experience .text-slate-400 {
+      color: #64748b !important;
+    }
+
+    body.light-mode #experience .from-slate-900\/60 {
+      background: linear-gradient(to bottom right, rgba(248,250,252,0.8), rgba(240,249,255,0.6)) !important;
+    }
+
+    body.light-mode #experience .to-slate-800\/30 {
+      background: linear-gradient(to top left, rgba(248,250,252,0.6), rgba(224,242,254,0.4)) !important;
+    }
+
+    body.light-mode #experience .border-slate-700\/50 {
+      border-color: rgba(6, 182, 212, 0.3) !important;
+    }
+
+    /* Skills Section Light Mode */
+    body.light-mode #skills h2 {
+      color: #0f172a !important;
+    }
+
+    body.light-mode #skills h3 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode #skills h4 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode #skills p {
+      color: #475569 !important;
+    }
+
+    body.light-mode #skills .text-slate-300 {
+      color: #334155 !important;
+    }
+
+    body.light-mode #skills .text-slate-400 {
+      color: #64748b !important;
+    }
+
+    /* Skill Cards - Light Mode */
+    body.light-mode #skills .from-cyan-900\/30 {
+      background: linear-gradient(to bottom right, rgba(206,245,254,0.6), rgba(187,247,208,0.3)) !important;
+    }
+
+    body.light-mode #skills .to-cyan-800\/10 {
+      background-color: transparent !important;
+    }
+
+    body.light-mode #skills .from-purple-900\/30 {
+      background: linear-gradient(to bottom right, rgba(243,232,255,0.8), rgba(230,204,255,0.4)) !important;
+    }
+
+    body.light-mode #skills .to-purple-800\/10 {
+      background-color: transparent !important;
+    }
+
+    body.light-mode #skills .from-blue-900\/30 {
+      background: linear-gradient(to bottom right, rgba(219,234,254,0.8), rgba(191,219,254,0.5)) !important;
+    }
+
+    body.light-mode #skills .to-blue-800\/10 {
+      background-color: transparent !important;
+    }
+
+    body.light-mode #skills .from-emerald-900\/30 {
+      background: linear-gradient(to bottom right, rgba(209,250,229,0.8), rgba(167,243,208,0.5)) !important;
+    }
+
+    body.light-mode #skills .to-emerald-800\/10 {
+      background-color: transparent !important;
+    }
+
+    /* Skill Card Borders */
+    body.light-mode #skills .border-cyan-700 {
+      border-color: rgba(6, 182, 212, 0.4) !important;
+    }
+
+    body.light-mode #skills .border-purple-700 {
+      border-color: rgba(147, 51, 234, 0.4) !important;
+    }
+
+    body.light-mode #skills .border-blue-700 {
+      border-color: rgba(59, 130, 246, 0.4) !important;
+    }
+
+    body.light-mode #skills .border-emerald-700 {
+      border-color: rgba(16, 185, 129, 0.4) !important;
+    }
+
+    body.light-mode #skills .border-cyan-600 {
+      border-color: rgba(6, 182, 212, 0.5) !important;
+    }
+
+    body.light-mode #skills .border-purple-600 {
+      border-color: rgba(147, 51, 234, 0.5) !important;
+    }
+
+    body.light-mode #skills .border-blue-600 {
+      border-color: rgba(59, 130, 246, 0.5) !important;
+    }
+
+    body.light-mode #skills .border-emerald-600 {
+      border-color: rgba(16, 185, 129, 0.5) !important;
+    }
+
+    /* Skill Badges - Light Mode */
+    body.light-mode #skills .bg-cyan-900\/50 {
+      background-color: rgba(6, 182, 212, 0.15) !important;
+    }
+
+    body.light-mode #skills .text-cyan-200 {
+      color: #0891b2 !important;
+    }
+
+    body.light-mode #skills .bg-purple-900\/50 {
+      background-color: rgba(147, 51, 234, 0.15) !important;
+    }
+
+    body.light-mode #skills .text-purple-200 {
+      color: #9333ea !important;
+    }
+
+    body.light-mode #skills .bg-blue-900\/50 {
+      background-color: rgba(59, 130, 246, 0.15) !important;
+    }
+
+    body.light-mode #skills .text-blue-200 {
+      color: #3b82f6 !important;
+    }
+
+    body.light-mode #skills .bg-emerald-900\/50 {
+      background-color: rgba(16, 185, 129, 0.15) !important;
+    }
+
+    body.light-mode #skills .text-emerald-200 {
+      color: #10b981 !important;
+    }
+
+    /* Proficiency Bars - Light Mode */
+    body.light-mode #skills .bg-slate-800\/60 {
+      background-color: rgba(30, 41, 59, 0.2) !important;
+    }
+
+    body.light-mode #skills .text-cyan-300 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode #skills .text-cyan-400 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode #skills .text-purple-400 {
+      color: #9333ea !important;
+    }
+
+    body.light-mode #skills .text-blue-400 {
+      color: #3b82f6 !important;
+    }
+
+    body.light-mode #skills .text-emerald-400 {
+      color: #10b981 !important;
+    }
+
+    /* Expertise Areas - Light Mode */
+    body.light-mode #skills .text-cyan-300 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode #skills .text-slate-200 {
+      color: #1e293b !important;
+    }
+
+    /* Proficiency Levels - Light Mode */
+    body.light-mode #skills .skill-level {
+      background-color: transparent;
+    }
+
+    body.light-mode #skills .skill-level .text-slate-300 {
+      color: #334155 !important;
+    }
+
+    body.light-mode #skills .text-orange-400 {
+      color: #f59e0b !important;
+    }
+
+    body.light-mode #skills .text-pink-400 {
+      color: #ec4899 !important;
+    }
+
+    /* Expertise Area Boxes - Light Mode */
+    body.light-mode #skills .bg-slate-900\/40 {
+      background-color: rgba(206, 245, 254, 0.5) !important;
+    }
+
+    body.light-mode #skills .bg-slate-900\/60 {
+      background-color: rgba(206, 245, 254, 0.7) !important;
+    }
+
+    body.light-mode #skills .border-slate-700\/40 {
+      border-color: rgba(6, 182, 212, 0.3) !important;
+    }
+
+    /* Expertise Area Text - Light Mode */
+    body.light-mode #skills .grid.grid-cols-2 .text-cyan-300 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode #skills .grid.grid-cols-2 .group-hover\:text-cyan-200 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode #skills .grid.grid-cols-2 .group-hover\:text-cyan-200:hover {
+      color: #0891b2 !important;
+    }
+
+    body.light-mode #skills .grid.grid-cols-2 .text-slate-400 {
+      color: #64748b !important;
+    }
+
+    /* Make sure all proficiency percentage text is colored properly */
+    body.light-mode #skills .text-cyan-400 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode #skills .text-purple-400 {
+      color: #9333ea !important;
+    }
+
+    body.light-mode #skills .text-blue-400 {
+      color: #3b82f6 !important;
+    }
+
+    body.light-mode #skills .text-emerald-400 {
+      color: #10b981 !important;
+    }
+
+    body.light-mode #skills .text-green-400 {
+      color: #22c55e !important;
+    }
+
+    body.light-mode #skills .text-yellow-400 {
+      color: #facc15 !important;
+    }
+
+    body.light-mode #skills .text-red-400 {
+      color: #f87171 !important;
+    }
+
+    body.light-mode #skills .text-indigo-400 {
+      color: #818cf8 !important;
     }
 
     /* ===== RESPONSIVE SPACING ===== */
@@ -697,6 +1221,385 @@
         padding: 1.5rem 0;
       }
     }
+
+    /* ===== DARK MODE STYLES ===== */
+    body.light-mode {
+      background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #f8fafc 100%) !important;
+      color: #1e293b !important;
+    }
+
+    body.light-mode * {
+      color-scheme: light;
+    }
+
+    body.light-mode h1, body.light-mode h2, body.light-mode h3, body.light-mode h4, body.light-mode h5, body.light-mode h6 {
+      color: #0f172a !important;
+    }
+
+    body.light-mode p, body.light-mode span, body.light-mode a, body.light-mode div {
+      color: #475569 !important;
+    }
+
+    body.light-mode nav {
+      background: rgba(255, 255, 255, 0.85) !important;
+      border-color: rgba(6, 182, 212, 0.2) !important;
+      backdrop-filter: blur(12px);
+    }
+
+    body.light-mode nav a {
+      color: #475569 !important;
+    }
+
+    body.light-mode nav a:hover {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode .bg-hero {
+      background: radial-gradient(ellipse at 20% 10%, rgba(6,182,212,0.15), transparent 40%),
+                  radial-gradient(ellipse at 80% 90%, rgba(30,58,138,0.12), transparent 40%),
+                  linear-gradient(180deg, #f8fafc 0%, #e0f2fe 100%) !important;
+    }
+
+    body.light-mode section {
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(224,242,254,0.6)) !important;
+    }
+
+    body.light-mode .card-hover, 
+    body.light-mode .tech-card, 
+    body.light-mode .project-card, 
+    body.light-mode .cert-card {
+      background: rgba(255, 255, 255, 0.95) !important;
+      border-color: rgba(6, 182, 212, 0.3) !important;
+      color: #1e293b !important;
+    }
+
+    body.light-mode .project-image {
+      background: linear-gradient(135deg, #e0f2fe, #f0f9ff) !important;
+    }
+
+    body.light-mode .matrix {
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(6,182,212,0.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(59,130,246,0.10) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(139,92,246,0.06) 0%, transparent 50%) !important;
+    }
+
+    body.light-mode .border-slate-900 {
+      border-color: rgba(15, 23, 42, 0.15) !important;
+    }
+
+    body.light-mode .border-slate-800 {
+      border-color: rgba(30, 41, 59, 0.15) !important;
+    }
+
+    body.light-mode .bg-slate-900 {
+      background-color: rgba(15, 23, 42, 0.08) !important;
+    }
+
+    body.light-mode .bg-slate-800 {
+      background-color: rgba(30, 41, 59, 0.08) !important;
+    }
+
+    body.light-mode .bg-slate-700 {
+      background-color: rgba(51, 65, 85, 0.1) !important;
+    }
+
+    body.light-mode .bg-black {
+      background-color: rgba(248, 250, 252, 0.9) !important;
+    }
+
+    body.light-mode button {
+      background-color: rgba(6, 182, 212, 0.1) !important;
+      color: #475569 !important;
+    }
+
+    body.light-mode button:hover {
+      background-color: rgba(6, 182, 212, 0.2) !important;
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode #theme-toggle {
+      background: rgba(148, 163, 184, 0.3) !important;
+      border-color: rgba(6, 182, 212, 0.3) !important;
+      color: #475569 !important;
+    }
+
+    body.light-mode #theme-toggle:hover {
+      background: rgba(6, 182, 212, 0.2) !important;
+      color: #06b6d4 !important;
+    }
+
+    /* Comprehensive Light Mode Styling */
+    body.light-mode .text-slate-100 {
+      color: #1e293b !important;
+    }
+
+    body.light-mode .text-slate-200 {
+      color: #334155 !important;
+    }
+
+    body.light-mode .text-slate-300 {
+      color: #64748b !important;
+    }
+
+    body.light-mode .text-slate-400 {
+      color: #94a3b8 !important;
+    }
+
+    body.light-mode .text-slate-500 {
+      color: #64748b !important;
+    }
+
+    body.light-mode .text-slate-600 {
+      color: #475569 !important;
+    }
+
+    body.light-mode .text-white {
+      color: #1e293b !important;
+    }
+
+    body.light-mode .text-cyan-300 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode .text-cyan-400 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode .text-cyan-300:hover,
+    body.light-mode .text-cyan-400:hover {
+      color: #0891b2 !important;
+    }
+
+    body.light-mode .text-green-400 {
+      color: #22c55e !important;
+    }
+
+    body.light-mode .text-green-300 {
+      color: #86efac !important;
+    }
+
+    body.light-mode .text-blue-400 {
+      color: #3b82f6 !important;
+    }
+
+    body.light-mode .text-purple-400 {
+      color: #a78bfa !important;
+    }
+
+    /* Background colors */
+    body.light-mode .bg-slate-900 {
+      background-color: rgba(15, 23, 42, 0.08) !important;
+    }
+
+    body.light-mode .bg-slate-800 {
+      background-color: rgba(30, 41, 59, 0.08) !important;
+    }
+
+    body.light-mode .bg-slate-700 {
+      background-color: rgba(51, 65, 85, 0.12) !important;
+    }
+
+    body.light-mode .bg-\[#0b0b0b\] {
+      background-color: rgba(248, 250, 252, 0.8) !important;
+    }
+
+    body.light-mode .bg-\[#0d0d0d\] {
+      background-color: rgba(248, 250, 252, 0.85) !important;
+    }
+
+    body.light-mode .bg-gradient-to-r {
+      background-image: linear-gradient(to right, rgba(6,182,212,0.15), rgba(6,182,212,0.1)) !important;
+    }
+
+    body.light-mode .bg-gradient-to-b {
+      background-image: linear-gradient(to bottom, rgba(6,182,212,0.1), rgba(6,182,212,0.05)) !important;
+    }
+
+    /* Borders */
+    body.light-mode .border-slate-900 {
+      border-color: rgba(15, 23, 42, 0.15) !important;
+    }
+
+    body.light-mode .border-slate-800 {
+      border-color: rgba(30, 41, 59, 0.2) !important;
+    }
+
+    body.light-mode .border-slate-700 {
+      border-color: rgba(51, 65, 85, 0.3) !important;
+    }
+
+    body.light-mode .border-cyan-600 {
+      border-color: rgba(6, 182, 212, 0.4) !important;
+    }
+
+    body.light-mode .border-cyan-500 {
+      border-color: rgba(6, 182, 212, 0.5) !important;
+    }
+
+    body.light-mode .border-slate-900\/50 {
+      border-color: rgba(15, 23, 42, 0.1) !important;
+    }
+
+    /* Shadows and filters */
+    body.light-mode .shadow-lg {
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    body.light-mode .shadow-xl {
+      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    body.light-mode .shadow-cyan-600\/10 {
+      box-shadow: 0 10px 15px rgba(6, 182, 212, 0.1) !important;
+    }
+
+    body.light-mode .shadow-cyan-600\/20 {
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.15) !important;
+    }
+
+    /* Specific element styling */
+    body.light-mode .backdro-blur-md {
+      background: rgba(255, 255, 255, 0.85) !important;
+    }
+
+    body.light-mode header {
+      background: linear-gradient(180deg, rgba(248, 250, 252, 0.95), rgba(240, 249, 255, 0.9)) !important;
+    }
+
+    body.light-mode header.bg-hero {
+      background: radial-gradient(ellipse at 20% 10%, rgba(6,182,212,0.15), transparent 40%),
+                  radial-gradient(ellipse at 80% 90%, rgba(30,58,138,0.12), transparent 40%),
+                  linear-gradient(180deg, #f8fafc 0%, #e0f2fe 100%) !important;
+    }
+
+    /* Skill bars */
+    body.light-mode .skill-bar {
+      background: linear-gradient(90deg, rgba(6,182,212,0.2), rgba(59,130,246,0.15)) !important;
+    }
+
+    /* Input/Form elements */
+    body.light-mode input,
+    body.light-mode textarea {
+      background-color: rgba(248, 250, 252, 0.9) !important;
+      color: #1e293b !important;
+      border-color: rgba(6, 182, 212, 0.3) !important;
+    }
+
+    body.light-mode input::placeholder,
+    body.light-mode textarea::placeholder {
+      color: #94a3b8 !important;
+    }
+
+    /* Links styling */
+    body.light-mode a.hover\:text-cyan-400:hover {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode .shadow-lg.shadow-cyan-600\/10 {
+      box-shadow: 0 10px 15px rgba(6, 182, 212, 0.12) !important;
+    }
+
+    body.light-mode .shadow-lg.shadow-cyan-600\/20 {
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.2) !important;
+    }
+
+    body.light-mode .shadow-lg.shadow-slate-900\/10 {
+      box-shadow: 0 10px 15px rgba(15, 23, 42, 0.1) !important;
+    }
+
+    /* Ensure all text is readable */
+    body.light-mode {
+      color: #1e293b !important;
+    }
+
+    body.light-mode * {
+      background-color: inherit;
+      color: inherit;
+    }
+
+    body.light-mode body > * {
+      color: #1e293b !important;
+    }
+
+    /* Modal and overlay elements */
+    body.light-mode .fixed {
+      background-color: rgba(248, 250, 252, 0.95) !important;
+    }
+
+    body.light-mode .absolute {
+      background-color: transparent !important;
+    }
+
+    /* Specific component fixes */
+    body.light-mode .space-y-4 > * {
+      color: #1e293b !important;
+    }
+
+    body.light-mode .space-y-6 > * {
+      color: #1e293b !important;
+    }
+
+    body.light-mode .gap-4 > * {
+      color: #1e293b !important;
+    }
+
+    body.light-mode .gap-6 > * {
+      color: #1e293b !important;
+    }
+
+    /* Icons and SVG */
+    body.light-mode svg {
+      color: inherit !important;
+    }
+
+    body.light-mode svg.text-cyan-300,
+    body.light-mode svg.text-cyan-400 {
+      color: #06b6d4 !important;
+    }
+
+    body.light-mode svg.text-slate-300 {
+      color: #64748b !important;
+    }
+
+    body.light-mode svg.text-white {
+      color: #1e293b !important;
+    }
+
+    /* Skill proficiency visual indicators */
+    body.light-mode .h-3 {
+      background: linear-gradient(90deg, rgba(6,182,212,0.25), rgba(59,130,246,0.2)) !important;
+    }
+
+    /* Ensure contrast for readability */
+    body.light-mode strong {
+      color: #0f172a !important;
+    }
+
+    body.light-mode b {
+      color: #0f172a !important;
+    }
+
+    /* Final catch-all for any remaining dark text */
+    body.light-mode body {
+      color: #1e293b !important;
+    }
+
+    body.light-mode body * {
+      color: inherit;
+    }
+
+    body.light-mode body .text-slate-100,
+    body.light-mode body .text-white,
+    body.light-mode body .text-slate-200,
+    body.light-mode body .text-slate-300 {
+      color: #1e293b !important;
+    }
+
+    /* Smooth transitions for all elements */
+    body, nav, section, .card-hover, .tech-card, .project-card, .cert-card, h1, h2, h3, p, a, button, div {
+      transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease !important;
+    }
   </style>
 </head>
 <body class="bg-black text-slate-100 antialiased">
@@ -714,7 +1617,12 @@
         <a href="#skills" class="hover:text-cyan-400">Skills</a>
         <a href="#projects" class="hover:text-cyan-400">Projects</a>
         <a href="#experience" class="hover:text-cyan-400">Experience</a>
+        <a href="#certifications" class="hover:text-cyan-400">Certifications</a>
         <a href="#contact" class="hover:text-cyan-400">Contact</a>
+        <button id="theme-toggle" class="ml-2 px-4 py-2 bg-slate-700/50 hover:bg-slate-600/70 rounded-lg text-slate-300 hover:text-cyan-400 font-medium transition transform hover:scale-105 border border-slate-600/50" title="Toggle dark/light mode">
+          <svg id="sun-icon" class="w-5 h-5 inline hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l-2.83-2.83a1 1 0 00-1.414 1.414l2.83 2.83a1 1 0 001.414-1.414zM2.05 6.464a1 1 0 00-1.414 1.414l2.83 2.83a1 1 0 101.414-1.414L2.05 6.464zm12.12 4.97l2.83-2.83a1 1 0 00-1.414-1.414l-2.83 2.83a1 1 0 001.414 1.414zM13.464 2.05a1 1 0 00-1.414 1.414l2.83 2.83a1 1 0 001.414-1.414L13.464 2.05zM6.464 13.536a1 1 0 001.414 1.414l2.83-2.83a1 1 0 00-1.414-1.414l-2.83 2.83zM3a1 1 0 011-1h2a1 1 0 110 2H4a1 1 0 01-1-1zm14 0a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+          <svg id="moon-icon" class="w-5 h-5 inline" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        </button>
         <a href="resume.pdf" class="ml-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg text-white font-medium shadow-lg shadow-cyan-600/20 transition transform hover:scale-105">Resume</a>
       </div>
       <div class="md:hidden text-slate-300">
@@ -826,55 +1734,71 @@
   </header>
 
   <!-- ABOUT -->
-  <section id="about" class="max-w-6xl mx-auto px-6 py-10">
-    <div class="grid md:grid-cols-2 gap-6 items-start">
-      <div class="space-y-4">
+  <section id="about" class="max-w-6xl mx-auto px-6 py-10 relative">
+    <!-- Dynamic Background -->
+    <div class="section-bg">
+      <div class="section-particles">
+        <div class="section-particle section-particle-1"></div>
+        <div class="section-particle section-particle-2"></div>
+        <div class="section-particle section-particle-3"></div>
+        <div class="section-particle section-particle-4"></div>
+      </div>
+      <!-- Neural Network Nodes -->
+      <div class="neural-node" style="top: 15%; left: 10%; color: #06b6d4;"></div>
+      <div class="neural-node" style="top: 35%; left: 25%; color: #3b82f6;"></div>
+      <div class="neural-node" style="top: 60%; right: 15%; color: #8b5cf6;"></div>
+      <div class="neural-node" style="bottom: 20%; left: 30%; color: #22c55e;"></div>
+      <div class="neural-node" style="bottom: 15%; right: 25%; color: #ec4899;"></div>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-8 items-start relative z-10">
+      <div class="space-y-6">
         <div>
-          <h2 class="text-3xl font-bold mb-2">About Me</h2>
-          <div class="w-12 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"></div>
+          <h2 class="text-4xl font-bold mb-3">About Me</h2>
+          <div class="w-12 h-1.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"></div>
         </div>
-        <p class="text-slate-300 leading-relaxed text-xs md:text-sm">
+        <p class="text-slate-300 leading-relaxed text-base">
           I'm an ML Engineer specializing in AI and Data Science, with expertise in building intelligent systems and production-grade solutions. I have hands-on experience across the complete ML pipeline—from data acquisition and preprocessing to model training, evaluation, and deployment. My work spans computer vision, deep learning, and data analytics.
         </p>
-        <p class="text-slate-400 leading-relaxed text-xs md:text-sm">
+        <p class="text-slate-400 leading-relaxed text-base">
           I'm passionate about solving complex problems with machine learning and AI. My focus areas include medical imaging AI, intelligent surveillance systems, and data-driven decision making. I'm committed to writing scalable, production-ready code and staying current with emerging technologies and industry best practices.
         </p>
 
-        <div class="flex flex-wrap gap-2 pt-1">
-          <a href="#projects" class="px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg font-medium transition transform hover:scale-105 shadow-lg shadow-cyan-600/20 text-white text-sm">See My Projects →</a>
-          <a href="#contact" class="px-4 py-2 border-2 border-cyan-600 hover:bg-cyan-600/10 rounded-lg font-medium transition transform hover:scale-105 text-white text-sm">Get In Touch</a>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a href="#projects" class="px-5 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg font-semibold transition transform hover:scale-105 shadow-lg shadow-cyan-600/20 text-white text-base">See My Projects →</a>
+          <a href="#contact" class="px-5 py-3 border-2 border-cyan-600 hover:bg-cyan-600/10 rounded-lg font-semibold transition transform hover:scale-105 text-white text-base">Get In Touch</a>
         </div>
       </div>
 
-      <div class="gradient-border p-6">
-        <h3 class="font-semibold text-slate-100 mb-4 text-base">🎯 Background</h3>
-        <ul class="space-y-4">
-          <li class="flex items-start gap-3 group">
-            <span class="text-xl group-hover:scale-125 transition transform">📍</span> 
+      <div class="gradient-border p-8">
+        <h3 class="font-semibold text-slate-100 mb-6 text-lg">🎯 Background</h3>
+        <ul class="space-y-6">
+          <li class="flex items-start gap-4 group">
+            <span class="text-3xl group-hover:scale-125 transition transform">📍</span> 
             <div>
-              <h4 class="text-cyan-400 font-semibold mb-1 text-sm">Location</h4>
-              <p class="text-slate-300 text-xs">Kolhapur, Maharashtra, India</p>
+              <h4 class="text-cyan-400 font-semibold mb-2 text-base">Location</h4>
+              <p class="text-slate-300 text-base">Kolhapur, Maharashtra, India</p>
             </div>
           </li>
-          <li class="flex items-start gap-3 group">
-            <span class="text-xl group-hover:scale-125 transition transform">🎓</span> 
+          <li class="flex items-start gap-4 group">
+            <span class="text-3xl group-hover:scale-125 transition transform">🎓</span> 
             <div>
-              <h4 class="text-cyan-400 font-semibold mb-0.5 text-sm">Education</h4>
-              <p class="text-slate-300 text-sm">B.Tech in AI & Data Science (CGPA: 8.1)</p>
+              <h4 class="text-cyan-400 font-semibold mb-1 text-base">Education</h4>
+              <p class="text-slate-300 text-base">B.Tech in AI & Data Science (CGPA: 8.1)</p>
             </div>
           </li>
-          <li class="flex items-start gap-3 group">
-            <span class="text-xl group-hover:scale-125 transition transform">💼</span> 
+          <li class="flex items-start gap-4 group">
+            <span class="text-3xl group-hover:scale-125 transition transform">💼</span> 
             <div>
-              <h4 class="text-cyan-400 font-semibold mb-0.5 text-sm">Expertise</h4>
-              <p class="text-slate-300 text-sm">ML Engineering • AI Solutions • Data Science</p>
+              <h4 class="text-cyan-400 font-semibold mb-1 text-base">Expertise</h4>
+              <p class="text-slate-300 text-base">ML Engineering • AI Solutions • Data Science</p>
             </div>
           </li>
-          <li class="flex items-start gap-3 group">
-            <span class="text-xl group-hover:scale-125 transition transform">📚</span> 
+          <li class="flex items-start gap-4 group">
+            <span class="text-3xl group-hover:scale-125 transition transform">📚</span> 
             <div>
-              <h4 class="text-cyan-400 font-semibold mb-0.5 text-sm">Specialization</h4>
-              <p class="text-slate-300 text-sm">Computer Vision • Deep Learning • Production Deployment</p>
+              <h4 class="text-cyan-400 font-semibold mb-1 text-base">Specialization</h4>
+              <p class="text-slate-300 text-base">Computer Vision • Deep Learning • Production Deployment</p>
             </div>
           </li>
         </ul>
@@ -883,8 +1807,23 @@
   </section>
 
   <!-- SKILLS (combined) -->
-  <section id="skills" class="py-10">
-    <div class="max-w-6xl mx-auto px-6">
+  <section id="skills" class="py-10 relative">
+    <!-- Dynamic Background -->
+    <div class="section-bg">
+      <div class="section-particles">
+        <div class="section-particle section-particle-1"></div>
+        <div class="section-particle section-particle-3"></div>
+        <div class="section-particle section-particle-4"></div>
+      </div>
+      <!-- Neural Network Nodes -->
+      <div class="neural-node" style="top: 20%; right: 10%; color: #06b6d4;"></div>
+      <div class="neural-node" style="top: 40%; left: 15%; color: #3b82f6;"></div>
+      <div class="neural-node" style="top: 55%; right: 20%; color: #8b5cf6;"></div>
+      <div class="neural-node" style="bottom: 25%; left: 10%; color: #22c55e;"></div>
+      <div class="neural-node" style="bottom: 10%; right: 5%; color: #f59e0b;"></div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
       <div class="text-center mb-8">
         <h2 class="text-3xl font-bold mb-2">Technical Expertise</h2>
         <div class="w-12 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-3"></div>
@@ -892,12 +1831,12 @@
       </div>
 
       <!-- Technology Categories Grid -->
-      <div class="grid md:grid-cols-4 gap-4 mb-8">
+      <div class="grid md:grid-cols-4 gap-5 mb-10">
         <!-- Languages Card -->
-        <div class="p-4 rounded-lg bg-gradient-to-br from-cyan-900/30 to-cyan-800/10 border border-cyan-700/40 hover:border-cyan-500 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20">
-          <div class="text-2xl mb-1.5">💬</div>
-          <h4 class="text-xs font-bold text-cyan-300 uppercase tracking-wider mb-2">Languages & Databases</h4>
-          <div class="flex flex-wrap gap-1.5 mb-3">
+        <div class="p-5 rounded-lg bg-gradient-to-br from-cyan-900/30 to-cyan-800/10 border border-cyan-700/40 hover:border-cyan-500 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20">
+          <div class="text-3xl mb-2">💬</div>
+          <h4 class="text-sm font-bold text-cyan-300 uppercase tracking-wider mb-3">Languages & Databases</h4>
+          <div class="flex flex-wrap gap-2 mb-3">
             <span class="skill-badge text-xs px-2 py-0.5 bg-cyan-900/50 text-cyan-200 rounded-full border border-cyan-600/40 hover:bg-cyan-900 transition">Python</span>
             <span class="skill-badge text-xs px-3 py-1 bg-cyan-900/50 text-cyan-200 rounded-full border border-cyan-600/40 hover:bg-cyan-900 transition">SQL</span>
             <span class="skill-badge text-xs px-3 py-1 bg-cyan-900/50 text-cyan-200 rounded-full border border-cyan-600/40 hover:bg-cyan-900 transition">Flask</span>
@@ -979,8 +1918,8 @@
         <!-- Proficiency Levels -->
         <!-- Core Proficiencies -->
         <div>
-          <h3 class="text-sm font-bold text-cyan-300 mb-3 flex items-center gap-2">📈 Core Proficiencies</h3>
-          <div class="space-y-2">
+          <h3 class="text-base font-bold text-cyan-300 mb-4 flex items-center gap-2">📈 Core Proficiencies</h3>
+          <div class="space-y-3">
             <div class="skill-level">
               <div class="flex justify-between text-xs mb-1">
                 <span class="text-slate-300 font-medium">Python Programming</span>
@@ -1045,31 +1984,31 @@
 
         <!-- Expertise Areas -->
         <div>
-          <h3 class="text-base font-bold text-cyan-300 mb-5 flex items-center gap-2">🎯 Expertise Areas</h3>
-          <div class="grid grid-cols-2 gap-3">
-            <div class="p-2.5 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-cyan-500/60 hover:bg-slate-900/60 transition group">
-              <p class="text-cyan-300 font-semibold text-xs group-hover:text-cyan-200">Model Architecture</p>
-              <p class="text-slate-400 text-xs mt-0.5">CNN, RNN, Transformer</p>
+          <h3 class="text-lg font-bold text-cyan-300 mb-6 flex items-center gap-2">🎯 Expertise Areas</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-cyan-500/60 hover:bg-slate-900/60 transition group">
+              <p class="text-cyan-300 font-semibold text-sm group-hover:text-cyan-200">Model Architecture</p>
+              <p class="text-slate-400 text-sm mt-2">CNN, RNN, Transformer</p>
             </div>
-            <div class="p-2.5 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-cyan-500/60 hover:bg-slate-900/60 transition group">
-              <p class="text-cyan-300 font-semibold text-xs group-hover:text-cyan-200">Feature Engineering</p>
-              <p class="text-slate-400 text-xs mt-0.5">Extraction & Selection</p>
+            <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-cyan-500/60 hover:bg-slate-900/60 transition group">
+              <p class="text-cyan-300 font-semibold text-sm group-hover:text-cyan-200">Feature Engineering</p>
+              <p class="text-slate-400 text-sm mt-2">Extraction & Selection</p>
             </div>
-            <div class="p-2.5 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-cyan-500/60 hover:bg-slate-900/60 transition group">
-              <p class="text-cyan-300 font-semibold text-xs group-hover:text-cyan-200">Model Optimization</p>
-              <p class="text-slate-400 text-xs mt-0.5">Tuning & Deployment</p>
+            <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-cyan-500/60 hover:bg-slate-900/60 transition group">
+              <p class="text-cyan-300 font-semibold text-sm group-hover:text-cyan-200">Model Optimization</p>
+              <p class="text-slate-400 text-sm mt-2">Tuning & Deployment</p>
             </div>
-            <div class="p-2.5 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-cyan-500/60 hover:bg-slate-900/60 transition group">
-              <p class="text-cyan-300 font-semibold text-xs group-hover:text-cyan-200">Production ML</p>
-              <p class="text-slate-400 text-xs mt-0.5">Scalability & Performance</p>
+            <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-cyan-500/60 hover:bg-slate-900/60 transition group">
+              <p class="text-cyan-300 font-semibold text-sm group-hover:text-cyan-200">Production ML</p>
+              <p class="text-slate-400 text-sm mt-2">Scalability & Performance</p>
             </div>
-            <div class="p-2.5 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-cyan-500/60 hover:bg-slate-900/60 transition group">
-              <p class="text-cyan-300 font-semibold text-xs group-hover:text-cyan-200">Data Pipeline</p>
-              <p class="text-slate-400 text-xs mt-0.5">ETL & Processing</p>
+            <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-cyan-500/60 hover:bg-slate-900/60 transition group">
+              <p class="text-cyan-300 font-semibold text-sm group-hover:text-cyan-200">Data Pipeline</p>
+              <p class="text-slate-400 text-sm mt-2">ETL & Processing</p>
             </div>
-            <div class="p-2.5 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-cyan-500/60 hover:bg-slate-900/60 transition group">
-              <p class="text-cyan-300 font-semibold text-xs group-hover:text-cyan-200">Statistical Analysis</p>
-              <p class="text-slate-400 text-xs mt-0.5">Inference & Testing</p>
+            <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-700/40 hover:border-cyan-500/60 hover:bg-slate-900/60 transition group">
+              <p class="text-cyan-300 font-semibold text-sm group-hover:text-cyan-200">Statistical Analysis</p>
+              <p class="text-slate-400 text-sm mt-2">Inference & Testing</p>
             </div>
           </div>
         </div>
@@ -1078,8 +2017,23 @@
   </section>
 
   <!-- PROJECTS (auto-load from GitHub) -->
-  <section id="projects" class="max-w-6xl mx-auto px-6 py-10">
-    <div class="text-center mb-8">
+  <section id="projects" class="max-w-6xl mx-auto px-6 py-10 relative">
+    <!-- Dynamic Background -->
+    <div class="section-bg">
+      <div class="section-particles">
+        <div class="section-particle section-particle-2"></div>
+        <div class="section-particle section-particle-3"></div>
+        <div class="section-particle section-particle-4"></div>
+      </div>
+      <!-- Neural Network Nodes -->
+      <div class="neural-node" style="top: 10%; left: 8%; color: #06b6d4;"></div>
+      <div class="neural-node" style="top: 30%; right: 12%; color: #3b82f6;"></div>
+      <div class="neural-node" style="top: 50%; left: 20%; color: #8b5cf6;"></div>
+      <div class="neural-node" style="bottom: 20%; right: 15%; color: #22c55e;"></div>
+      <div class="neural-node" style="bottom: 5%; left: 40%; color: #ec4899;"></div>
+    </div>
+    
+    <div class="relative z-10">
       <h2 class="text-3xl font-bold mb-2">Featured Projects</h2>
       <div class="w-12 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-3"></div>
       <p class="text-slate-400 max-w-2xl mx-auto text-sm">Hands-on ML projects showcasing practical learning in computer vision, deep learning, and intelligent systems</p>
@@ -1092,51 +2046,83 @@
     <div class="text-center">
       <a href="https://github.com/Onkar8722?tab=repositories" target="_blank" class="inline-block px-6 py-2 md:px-8 md:py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg font-semibold text-white transition transform hover:scale-105 shadow-lg shadow-cyan-600/20 text-sm md:text-base">View All Repositories on GitHub →</a>
     </div>
+    </div>
   </section>
 
   <!-- EXPERIENCE -->
-  <section id="experience" class="py-10">
-    <div class="max-w-6xl mx-auto px-6">
+  <section id="experience" class="py-10 relative">
+    <!-- Dynamic Background -->
+    <div class="section-bg">
+      <div class="section-particles">
+        <div class="section-particle section-particle-1"></div>
+        <div class="section-particle section-particle-2"></div>
+        <div class="section-particle section-particle-4"></div>
+      </div>
+      <!-- Neural Network Nodes -->
+      <div class="neural-node" style="top: 15%; left: 12%; color: #06b6d4;"></div>
+      <div class="neural-node" style="top: 45%; right: 18%; color: #3b82f6;"></div>
+      <div class="neural-node" style="top: 65%; left: 25%; color: #8b5cf6;"></div>
+      <div class="neural-node" style="bottom: 25%; right: 10%; color: #22c55e;"></div>
+      <div class="neural-node" style="bottom: 8%; left: 50%; color: #f59e0b;"></div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
       <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold mb-2">Professional Background</h2>
-        <div class="w-12 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto"></div>
+        <h2 class="text-3xl font-bold mb-3">Professional Background</h2>
+        <div class="w-12 h-1.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto"></div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="card-hover p-6 rounded-lg bg-gradient-to-br from-slate-900/60 to-slate-800/30 border border-slate-700/50 hover:border-cyan-500/50">
-          <div class="flex items-start gap-4 mb-4">
-            <div class="text-4xl">🏆</div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="card-hover p-8 rounded-lg bg-gradient-to-br from-slate-900/60 to-slate-800/30 border border-slate-700/50 hover:border-cyan-500/50">
+          <div class="flex items-start gap-4 mb-5">
+            <div class="text-5xl">🏆</div>
             <div>
-              <h4 class="font-bold text-cyan-300 text-lg">Core Competencies</h4>
-              <p class="text-slate-400 text-sm">Specialized Expertise</p>
+              <h4 class="font-bold text-cyan-300 text-xl">Core Competencies</h4>
+              <p class="text-slate-400 text-base">Specialized Expertise</p>
             </div>
           </div>
-          <p class="text-slate-300 text-sm mb-3">ML Infrastructure & Development</p>
-          <p class="text-slate-400 leading-relaxed text-sm">
+          <p class="text-slate-300 text-base mb-4">ML Infrastructure & Development</p>
+          <p class="text-slate-400 leading-relaxed text-base">
             Expert in machine learning architecture design, model optimization, and production deployment. Proficient in TensorFlow, PyTorch, and scikit-learn. Strong background in computer vision (OpenCV, YOLO), deep learning (CNNs, RNNs, Transformers), and end-to-end ML pipeline development. Experienced with data engineering, feature engineering, and algorithm optimization.
           </p>
         </div>
 
-        <div class="card-hover p-6 rounded-lg bg-gradient-to-br from-slate-900/60 to-slate-800/30 border border-slate-700/50 hover:border-cyan-500/50">
-          <div class="flex items-start gap-4 mb-4">
-            <div class="text-4xl">👨‍🎓</div>
+        <div class="card-hover p-8 rounded-lg bg-gradient-to-br from-slate-900/60 to-slate-800/30 border border-slate-700/50 hover:border-cyan-500/50">
+          <div class="flex items-start gap-4 mb-5">
+            <div class="text-5xl">👨‍🎓</div>
             <div>
-              <h4 class="font-bold text-cyan-300 text-lg">Academic Foundation</h4>
-              <p class="text-slate-400 text-sm">B.Tech AI & Data Science</p>
+              <h4 class="font-bold text-cyan-300 text-xl">Academic Foundation</h4>
+              <p class="text-slate-400 text-base">B.Tech AI & Data Science</p>
             </div>
           </div>
-          <p class="text-slate-300 text-sm mb-3">CGPA: 8.1 | Kolhapur, India</p>
-          <p class="text-slate-400 leading-relaxed text-sm">
+          <p class="text-slate-300 text-base mb-4">CGPA: 8.1 | Kolhapur, India</p>
+          <p class="text-slate-400 leading-relaxed text-base">
             Strong academic foundation with comprehensive coursework in machine learning, deep learning, computer vision, natural language processing, and data engineering. Completed 12+ production-level projects. Active contributor to open-source ML communities and continuous learner of emerging technologies and industry best practices.
           </p>
         </div>
       </div>
     </div>
+    </div>
   </section>
 
   <!-- CERTIFICATIONS & CREDENTIALS -->
-  <section id="certifications" class="max-w-6xl mx-auto px-6 py-10">
-    <div class="text-center mb-8">
+  <section id="certifications" class="max-w-6xl mx-auto px-6 py-10 relative">
+    <!-- Dynamic Background -->
+    <div class="section-bg">
+      <div class="section-particles">
+        <div class="section-particle section-particle-1"></div>
+        <div class="section-particle section-particle-3"></div>
+        <div class="section-particle section-particle-4"></div>
+      </div>
+      <!-- Neural Network Nodes -->
+      <div class="neural-node" style="top: 18%; right: 15%; color: #06b6d4;"></div>
+      <div class="neural-node" style="top: 38%; left: 10%; color: #3b82f6;"></div>
+      <div class="neural-node" style="top: 60%; right: 25%; color: #8b5cf6;"></div>
+      <div class="neural-node" style="bottom: 22%; left: 20%; color: #22c55e;"></div>
+      <div class="neural-node" style="bottom: 12%; right: 30%; color: #ec4899;"></div>
+    </div>
+    
+    <div class="relative z-10">
       <h2 class="text-3xl font-bold mb-2">Certifications & Courses</h2>
       <div class="w-12 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-3"></div>
       <p class="text-slate-400 max-w-2xl mx-auto text-sm">Online certifications and specialized training in Machine Learning, Python, Data Analytics, and emerging technologies</p>
@@ -1198,11 +2184,27 @@
         </div>
       </div>
     </div>
+    </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="py-10">
-    <div class="max-w-6xl mx-auto px-6">
+  <section id="contact" class="py-10 relative">
+    <!-- Dynamic Background -->
+    <div class="section-bg">
+      <div class="section-particles">
+        <div class="section-particle section-particle-1"></div>
+        <div class="section-particle section-particle-2"></div>
+        <div class="section-particle section-particle-3"></div>
+      </div>
+      <!-- Neural Network Nodes -->
+      <div class="neural-node" style="top: 12%; left: 15%; color: #06b6d4;"></div>
+      <div class="neural-node" style="top: 42%; right: 20%; color: #3b82f6;"></div>
+      <div class="neural-node" style="top: 68%; left: 30%; color: #8b5cf6;"></div>
+      <div class="neural-node" style="bottom: 18%; right: 12%; color: #22c55e;"></div>
+      <div class="neural-node" style="bottom: 8%; left: 45%; color: #f59e0b;"></div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
       <div class="text-center mb-8">
         <h2 class="text-3xl font-bold mb-2">Get In Touch</h2>
         <div class="w-12 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-3"></div>
@@ -1235,7 +2237,7 @@
           <div class="flex flex-wrap gap-2 mb-4">
             <a href="https://linkedin.com/in/onkar-kumbhar08" target="_blank" rel="noopener" class="px-4 py-2 bg-gradient-to-r from-blue-600/20 to-blue-600/10 hover:from-blue-600/40 hover:to-blue-600/30 border border-blue-600/50 rounded-lg font-medium text-sm text-blue-300 transition transform hover:scale-105 shadow-lg shadow-blue-600/10">LinkedIn</a>
             <a href="https://github.com/Onkar8722" target="_blank" rel="noopener" class="px-4 py-2 bg-gradient-to-r from-gray-700/20 to-gray-700/10 hover:from-gray-600/40 hover:to-gray-600/30 border border-gray-600/50 rounded-lg font-medium text-sm text-gray-300 transition transform hover:scale-105 shadow-lg shadow-gray-600/10">GitHub</a>
-            <a href="https://twitter.com" target="_blank" rel="noopener" class="px-4 py-2 bg-gradient-to-r from-cyan-600/20 to-cyan-600/10 hover:from-cyan-600/40 hover:to-cyan-600/30 border border-cyan-600/50 rounded-lg font-medium text-sm text-cyan-300 transition transform hover:scale-105 shadow-lg shadow-cyan-600/10">Twitter</a>
+            <a href="https://x.com/onkark1045" target="_blank" rel="noopener" class="px-4 py-2 bg-gradient-to-r from-cyan-600/20 to-cyan-600/10 hover:from-cyan-600/40 hover:to-cyan-600/30 border border-cyan-600/50 rounded-lg font-medium text-sm text-cyan-300 transition transform hover:scale-105 shadow-lg shadow-cyan-600/10">X</a>
           </div>
           <p class="text-slate-400 text-sm">Open to collaboration, contract work, and full-time roles. Let's build something impactful together.</p>
         </div>

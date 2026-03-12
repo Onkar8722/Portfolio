@@ -334,5 +334,131 @@
     "data": {
       "page": "home"
     }
+  },
+  {
+    "timestamp": "2026-03-12T09:23:06.725573",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T09:29:31.804827",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T09:31:42.077209",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T09:38:13.773570",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T09:40:29.699888",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T09:42:02.054965",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T09:49:17.628073",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T09:50:49.954429",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T09:53:32.082977",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T09:57:44.434320",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T10:00:41.641324",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T10:02:20.048251",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T10:12:28.320874",
+    "type": "project_view",
+    "data": {
+      "project": "Neurobloom"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T10:29:45.910717",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T10:32:37.662990",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:33:52.216924",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:34:49.296054",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
+  },
+  {
+    "timestamp": "2026-03-12T16:36:25.727262",
+    "type": "page_view",
+    "data": {
+      "page": "home"
+    }
   }
 ]
